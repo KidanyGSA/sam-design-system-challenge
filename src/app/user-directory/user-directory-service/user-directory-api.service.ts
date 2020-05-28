@@ -41,7 +41,7 @@ export class UserDirectoryService {
 	//Filter records given the filter object containing the formly filter model
     filterRecord(record, filter) {
 
-    	if(filter.department) {
+    	if(filter.department.length > 0) {
     		if(!this.hasDepartment(record, filter.department)) {
     			return false;
     		}
@@ -50,14 +50,12 @@ export class UserDirectoryService {
 	}
 	
 	hasDepartment (record, departmentList){
-		if(departmentList.length > 0) {	
 			for (let department of departmentList){
 				if(department.value == record.department) {					
 					return true;
 				}			
 			}
-			return false;	    		
-    	}
+			return false;
 	}
 
     filterTerminationType(record, terminationType) {

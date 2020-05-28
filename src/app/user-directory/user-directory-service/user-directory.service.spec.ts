@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserDirectoryService } from './user-directory.service';
+import { UserDirectoryService } from './user-directory-api.service';
 
 describe('UserDirectoryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

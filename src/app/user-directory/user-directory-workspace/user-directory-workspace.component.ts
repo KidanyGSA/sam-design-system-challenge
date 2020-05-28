@@ -2,20 +2,22 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import { FormlyFieldConfig } from '@ngx-formly/core';
-
 import { filter, map } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
+import { SearchListConfiguration } from '@gsa-sam/layouts';
+
 import { workspaceMenuData } from '../../common/sam-workspace-menu/user-directory-menu.data';
-import { UserDirectoryService } from '../user-directory-service/user-directory.service';
-import { UserDirectoryWsFiltersService } from './user-directory-ws-filters/user-directory-ws-filters.service';
+import { UserDirectoryService } from '../user-directory-service/user-directory-api.service';
+import { FiltersService } from './user-directory-filters/filters.config.service';
+import { listConfig } from './searchList.config'
 
 @Component({
   selector: 'app-user-directory-workspace',
   templateUrl: './user-directory-workspace.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UserDirectoryService, UserDirectoryWsFiltersService]
+  providers: [UserDirectoryService, FiltersService]
 })
 export class UserDirectoryWorkspaceComponent implements OnInit {
 
@@ -26,6 +28,7 @@ export class UserDirectoryWorkspaceComponent implements OnInit {
   showFilters: boolean = true;
 
   public filterChange$ = new BehaviorSubject<object>(null);
+  public listModel: SearchListConfiguration;
 
   subheader = {
     actions: [
@@ -37,9 +40,10 @@ export class UserDirectoryWorkspaceComponent implements OnInit {
 
   constructor(private change: ChangeDetectorRef,
               public service: UserDirectoryService, 
-              public filterService: UserDirectoryWsFiltersService) { }
+              public filterService: FiltersService) { }
 
   ngOnInit() {
+    this.listModel = listConfig;
   }
 
   ngAfterViewInit() {

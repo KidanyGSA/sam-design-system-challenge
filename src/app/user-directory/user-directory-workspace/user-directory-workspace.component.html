@@ -44,10 +44,10 @@
                       </sds-toolbar>
                   </div>
                   <div class="grid-col-12 tablet:grid-col-fill">
-                      <search-list-layout #resultList [service]="service" [configuration]="service.model">
+                      <search-list-layout #resultList [service]="service" [configuration]="listModel">
                         <ng-template #resultContent let-item>
                             <div>
-                                  <user-directory-ws-item [model]="item"></user-directory-ws-item>
+                                  <user-directory-item [model]="item"></user-directory-item>
                             </div>
                         </ng-template>
                     </search-list-layout>

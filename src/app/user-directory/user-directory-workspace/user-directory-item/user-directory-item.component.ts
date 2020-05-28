@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'user-directory-ws-item',
-  templateUrl: './user-directory-ws-item.component.html',
-  styleUrls: ['./user-directory-ws-item.component.scss']
+  selector: 'user-directory-item',
+  templateUrl: './user-directory-item.component.html',
+  styleUrls: ['./user-directory-item.component.scss']
 })
-export class UserDirectoryWsItemComponent implements OnInit {
+export class UserDirectoryItemComponent implements OnInit {
 
   @Input() model;
 

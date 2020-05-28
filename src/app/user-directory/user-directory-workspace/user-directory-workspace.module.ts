@@ -19,13 +19,13 @@ import { SdsSubheaderModule, SearchListServiceModule } from '@gsa-sam/layouts';
 
 import { UserDirectoryWorkspaceComponent } from './user-directory-workspace.component';
 import { UserDirectoryWorkspaceRoutingModule } from './user-directory-workspace-routing.module';
-import { UserDirectoryWsItemComponent } from './user-directory-ws-item/user-directory-ws-item.component';
+import { UserDirectoryItemComponent } from './user-directory-item/user-directory-item.component';
 
 
 
 
 @NgModule({
-  declarations: [UserDirectoryWorkspaceComponent, UserDirectoryWsItemComponent],
+  declarations: [UserDirectoryWorkspaceComponent, UserDirectoryItemComponent],
   imports: [
     CommonModule,
     RouterModule,

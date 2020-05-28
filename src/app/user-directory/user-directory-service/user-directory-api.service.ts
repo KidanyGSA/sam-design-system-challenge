@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { SearchParameters, SearchResult, SearchListConfiguration } from '@gsa-sam/layouts';
+import { SearchParameters, SearchResult } from '@gsa-sam/layouts';
 
 import { userDirectoryData } from './user.data';
 
@@ -10,17 +10,7 @@ import { userDirectoryData } from './user.data';
 @Injectable()
 export class UserDirectoryService {
 
-  constructor() { }
-
-  	public model: SearchListConfiguration = {
-	  defaultSortValue: "userAscending",
-	  pageSize: 25,
-	  sortList:
-	    [
-	      { text: "Name (A-Z)", value: "userAscending" },
-	      { text: "Name (Z-A)", value: "userDescending" },
-	    ]
-	};
+  constructor() { }  	
 
     /*
      * Here is the main method that the design system calls

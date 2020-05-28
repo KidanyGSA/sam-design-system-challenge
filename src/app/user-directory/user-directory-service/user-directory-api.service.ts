@@ -16,11 +16,13 @@ export class UserDirectoryService {
      * Here is the main method that the design system calls
      */
     getData(search: SearchParameters): Observable<SearchResult> {
+		console.log("search")
+		console.log(search)
 
         let records = userDirectoryData;
 
         /* Filter */
-        if(search && search.filter) {
+        if(search && search.filter) {			
         	records = userDirectoryData.filter(record => this.filterRecord(record, search.filter))
         }
 
@@ -38,23 +40,25 @@ export class UserDirectoryService {
 
 	//Filter records given the filter object containing the formly filter model
     filterRecord(record, filter) {
-    	if(filter.terminationType) {
-    		if(!this.filterTerminationType(record, filter.terminationType)) {
-    			return false;
-    		}
-    	}
-    	if(filter.recordType && filter.recordType.length > 0) {
-    		if(!this.filterRecordType(record, filter.recordType)) {
-    			return false;
-    		}
-    	}
-    	if(filter.awardee) {
-    		if(!this.filterAwardee(record, filter.awardee)) {
+
+    	if(filter.department) {
+    		if(!this.hasDepartment(record, filter.department)) {
     			return false;
     		}
     	}
     	return true;
-    }
+	}
+	
+	hasDepartment (record, departmentList){
+		if(departmentList.length > 0) {	
+			for (let department of departmentList){
+				if(department.value == record.department) {					
+					return true;
+				}			
+			}
+			return false;	    		
+    	}
+	}
 
     filterTerminationType(record, terminationType) {
     	if(!terminationType.Complete && !terminationType.Partial && !terminationType.NA) {
@@ -68,15 +72,6 @@ export class UserDirectoryService {
     	}
     	if(terminationType.NA && record.terminationType == 'N/A') {
     		return true
-    	}
-    	return false;
-    }
-
-    filterRecordType(record, recordTypes) {
-    	for(let i=0; i<recordTypes.length; i++) {
-    		if(record.recordType == recordTypes[i].label) {
-    			return true;
-    		}
     	}
     	return false;
     }

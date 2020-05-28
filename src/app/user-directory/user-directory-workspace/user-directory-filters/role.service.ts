@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SDSAutocompletelConfiguration, SDSSelectedItemModel, SelectionMode, SDSHiercarchicalServiceResult, SDSAutocompleteServiceInterface } from '@gsa-sam/components';
 import { userDirectoryData } from '../../user-directory-service/user.data';
-import {CommonFilterUtilsService} from './common-filter-utils.service';
+import {CommonFilterUtilsService} from '../../../common/sam-filters/common-filter-utils.service';
 import { of } from 'rxjs';
 
 @Injectable()

@@ -22,7 +22,6 @@ import { UserDirectoryWorkspaceRoutingModule } from './user-directory-workspace-
 import { UserDirectoryItemComponent } from './user-directory-item/user-directory-item.component';
 import { CommonFiltersModule } from 'src/app/common/sam-filters/common-filters.module';
 import { CommonFilterUtilsService } from 'src/app/common/sam-filters/common-filter-utils.service';
-import { DomainFilterService } from 'src/app/common/sam-filters/domain-filters/domain-filter.service';
 
 
 
@@ -45,7 +44,7 @@ import { DomainFilterService } from 'src/app/common/sam-filters/domain-filters/d
     CommonFiltersModule, 
   ],
   exports: [UserDirectoryWorkspaceComponent],
-  providers: [SDSFormlyUpdateComunicationService, CommonFilterUtilsService, DomainFilterService
+  providers: [SDSFormlyUpdateComunicationService, CommonFilterUtilsService
     ]
 })
 export class UserDirectoryWorkspaceModule { }

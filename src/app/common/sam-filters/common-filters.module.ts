@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DepartmentFilterService } from '../public-apis';
-import { CommonFilterUtilsService } from './common-filter-utils.service';
 import { DomainFilterService } from './domain-filters/domain-filter.service';
 @NgModule({
   declarations: [],
@@ -10,8 +9,7 @@ import { DomainFilterService } from './domain-filters/domain-filter.service';
   ],
   providers:[   
     DepartmentFilterService,
-    DomainFilterService,
-    CommonFilterUtilsService
+    DomainFilterService
   ]
 })
 export class CommonFiltersModule { }

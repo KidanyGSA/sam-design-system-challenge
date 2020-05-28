@@ -5,6 +5,7 @@ import { SDSAutocompletelConfiguration, SelectionMode } from '@gsa-sam/component
 
 import { DepartmentFilterService } from '../../../common/public-apis';
 import { DomainFilterService } from '../../../common/sam-filters/domain-filters/domain-filter.service';
+import { UserSearchService } from './userSearch.service';
 
 /**
  * This service manages the formly filter definitions and model.
@@ -15,20 +16,37 @@ export class FiltersConfigService {
   public model = {};
 
   constructor(
-    private hierarchyService: DepartmentFilterService,
-    private domainService: DomainFilterService
-  ) { }
+    private departmentService: DepartmentFilterService,
+    private domainService: DomainFilterService,
+    private userService: UserSearchService
+  ) {}
+
 
 
   public filters: FormlyFieldConfig[] = [
     {
-      key: 'keyword',
-      type: 'input',
+      key: 'userSearch',
+      type: 'autocomplete',
       templateOptions: {
         label: 'Users',
-        placeholder: "Type a name or email",
         group: 'panel',
-        className: 'sds-accordion__title'
+        className: 'sds-accordion__title',
+        service: this.userService,
+        configuration: this.userService.config,
+        model: this.userService.model
+      },
+    },
+    {
+      key: 'department',
+      type: 'autocomplete',
+      templateOptions: {
+        label: 'Department',
+        placeholder: "Type a name or email",
+        group: 'accordion',
+        className: 'sds-accordion__title',
+        service: this.departmentService,
+        configuration: this.departmentService.config,
+        model: this.departmentService.model
       },
     },
     {
@@ -74,20 +92,7 @@ export class FiltersConfigService {
           },
         ]
       }
-    },
-    {
-      key: 'department',
-      type: 'autocomplete',
-      templateOptions: {
-        label: 'Department',
-        placeholder: "Type a name or email",
-        group: 'accordion',
-        className: 'sds-accordion__title',
-        service: this.hierarchyService,
-        configuration: this.hierarchyService.config,
-        model: this.hierarchyService.model
-      },
-    },
+    },    
     {
       key: 'domain',
       type: 'autocomplete',
@@ -101,7 +106,6 @@ export class FiltersConfigService {
       }
     }
   ];
-
 
 }// end of class
 

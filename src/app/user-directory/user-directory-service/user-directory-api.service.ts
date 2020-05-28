@@ -12,7 +12,6 @@ export class UserDirectoryService {
 	
 
 	constructor() { }
-
     /*
      * Here is the main method that the design system calls
      */
@@ -39,23 +38,31 @@ export class UserDirectoryService {
 	//Filter records given the filter object containing the formly filter model
 	filterRecord(record, filter) {
 
+		//Role filter
 		if (filter.role) {
 			const answer = this.filterRoleType(record, filter.role);
 			if(!answer){return false; }
 		}
 
+		//Department filter
 		if (filter.department && filter.department.length > 0) {
 			if (!this.filterDepartment(record, filter.department)) {
 				return false;
 			}
 		}
-
+		//Domain filter
 		if (filter.domain && filter.domain.length > 0) {
 			if (!this.filterDomain(record, filter.domain)) {
 				return false;
 			}
 		}
-		
+		//User search filter
+		if (filter.userSearch && filter.userSearch.length > 0) {
+			if (!this.filterUserByName(record, filter.userSearch)) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 
@@ -92,6 +99,17 @@ export class UserDirectoryService {
 	filterDomain(record, domainList) {
 		for (let domain of domainList) {
 			if (domain.value == record.domain) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	filterUserByName(record, nameKeywords) {
+		for (let keyword of nameKeywords) {
+			if (record.givenName.toLowerCase().startsWith(keyword.value.toLowerCase())
+				|| record.familyName.toLowerCase().startsWith(keyword.value.toLowerCase())
+				|| record.emailAddress.toLowerCase().includes(keyword.value.toLowerCase())) {
 				return true;
 			}
 		}

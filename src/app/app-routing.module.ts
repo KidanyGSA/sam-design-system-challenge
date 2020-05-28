@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-<<<<<<< HEAD
-=======
   {
   	path: '',
   	redirectTo: '/workspace/user-directory', pathMatch: 'full'
@@ -16,7 +14,6 @@ const routes: Routes = [
   	path: '**',
   	redirectTo: '/workspace/user-directory', pathMatch: 'full'
   }
->>>>>>> 2d1ad814502b1d39cd2afc2d5ab618d7712b8598
 ];
 
 @NgModule({

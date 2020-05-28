@@ -15,25 +15,10 @@ export class FiltersConfigService {
 
  // recordTypeSettings: SDSAutocompletelConfiguration = new SDSAutocompletelConfiguration();
 
-  // constructor(
-  //   private hierarchyService: HierarchyFilterService
-  // ) {
+  constructor(
+  ) { }
 
- 	// 	// this.recordTypeSettings.id = 'recordType';
-	// 	// this.recordTypeSettings.primaryKeyField = 'label';
-	// 	// this.recordTypeSettings.primaryTextField = 'label';
-	// 	// this.recordTypeSettings.secondaryTextField = '';
-	// 	// this.recordTypeSettings.labelText = 'label';
-	// 	// this.recordTypeSettings.selectionMode = SelectionMode.MULTIPLE;
-	// 	// this.recordTypeSettings.autocompletePlaceHolderText = 'Select...';
-	// 	// this.recordTypeSettings.debounceTime = 100;
-
-  // }
-
-
-  public model = {};
-
-  public filters: FormlyFieldConfig[] = [
+   filters: FormlyFieldConfig[] = [
     {
       key: 'keyword',
       type: 'input',
@@ -43,5 +28,52 @@ export class FiltersConfigService {
         className: 'sds-accordion__title'
       },
     },
+    { key: 'role',
+      wrappers: ['accordionwrapper'],
+      type: 'multicheckbox',
+      templateOptions: {
+        label: 'Role',
+        // group: 'role',
+        defaultValue: false,
+        options: [
+          {
+            label: 'AAC User',
+            value: 'AAC User',
+            },
+            {
+              label: 'Administrator',
+              value: 'Administrator'
+              },
+              {
+                label: 'Administrator All Domains',
+                value: 'Administrator All Domains'
+                },
+                {
+                  label: 'Assistance Administrator',
+                  value: 'Assistance Administrator'
+                  },
+                  {
+                    label: 'Assistance User',
+                    value: 'Assistance User'
+                    },
+                    {
+                      label: 'Content Manager',
+                      value: 'Content Manager'
+                      },
+                      {
+                        label: 'Contracting Officer',
+                        value: 'Contracting Officer'
+                        },
+                        {
+                          label: 'Contracting Specialist',
+                          value: 'Contracting Specialist'
+                          },
+        ]
+      }
+    }
+
   ];
-}
+
+
+}// end of class
+

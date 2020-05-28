@@ -20,6 +20,7 @@ import { SdsSubheaderModule, SearchListServiceModule } from '@gsa-sam/layouts';
 import { UserDirectoryWorkspaceComponent } from './user-directory-workspace.component';
 import { UserDirectoryWorkspaceRoutingModule } from './user-directory-workspace-routing.module';
 import { UserDirectoryItemComponent } from './user-directory-item/user-directory-item.component';
+import { CommonFilterUtilsService } from './user-directory-filters/common-filter-utils.service';
 
 
 
@@ -38,9 +39,10 @@ import { UserDirectoryItemComponent } from './user-directory-item/user-directory
     SdsFiltersModule,
     SdsSubheaderModule, 
     SearchListServiceModule,
-    UserDirectoryWorkspaceRoutingModule,    
+    UserDirectoryWorkspaceRoutingModule,
   ],
   exports: [UserDirectoryWorkspaceComponent],
-  providers: [SDSFormlyUpdateComunicationService, ]
+  providers: [SDSFormlyUpdateComunicationService, CommonFilterUtilsService,
+    ]
 })
 export class UserDirectoryWorkspaceModule { }

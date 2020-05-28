@@ -4,26 +4,29 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { SDSAutocompletelConfiguration, SelectionMode } from '@gsa-sam/components';
 
 import {
-  HierarchyFilterService,
+  DepartmentFilterService,
 } from '../../../common/public-apis';
 
 /**
  * This service manages the formly filter definitions and model.
  */
 @Injectable()
-export class FiltersConfigService {
+export class FiltersConfigService { 
 
- // recordTypeSettings: SDSAutocompletelConfiguration = new SDSAutocompletelConfiguration();
-
+  public model = {};
+  
   constructor(
-  ) { }
+    private hierarchyService: DepartmentFilterService
+  ) {}
 
-   filters: FormlyFieldConfig[] = [
+
+  public filters: FormlyFieldConfig[] = [
     {
       key: 'keyword',
       type: 'input',
       templateOptions: {
-        label: 'Keyword',
+        label: 'Users',
+        placeholder: "Type a name or email",
         group: 'panel',
         className: 'sds-accordion__title'
       },
@@ -69,9 +72,20 @@ export class FiltersConfigService {
                           value: 'Contracting Specialist'
                           },
         ]
-      }
-    }
-
+      }},
+      {
+        key: 'department',
+        type: 'autocomplete',
+        templateOptions: {
+          label: 'Department',
+          placeholder: "Type a name or email",
+          group: 'accordion',
+          className: 'sds-accordion__title',
+          service: this.hierarchyService,
+          configuration: this.hierarchyService.config,
+          model: this.hierarchyService.model
+        },
+      },
   ];
 
 

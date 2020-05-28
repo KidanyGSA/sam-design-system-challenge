@@ -1,23 +1,27 @@
-
-
 <div class="sds-card sds-card--vertical">
     <div class="sds-card__title--vertical">
         <i class="sds fa-user fa-2x"></i>
     </div>
     <div class="sds-card__body">
         <div class="grid-row grid-gap">
-            <div class="grid-col-8">
+            <div class="grid-col-12">
                 <h3 class="sds-card--subtitle">
-                    <a class="usa-link" >{{model.givenName}}{{' '}}{{model.familyName}}</a>
+                    <a class="usa-link">{{model.givenName}}{{' '}}{{model.familyName}}</a>
                 </h3>
-                <!-- <p>Latest Update: <b>{{model.lastModifiedDate | date }}</b></p>
-                <p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 16px; font-size: 15px; max-height: 32px; margin-bottom: 1rem;" [innerHTML]="model.description">
-                </p>
-                <a class="usa-link" [routerLink]="['/help/' + model.contentId]">View Full Article</a>
-            </div>                
-            <div class="grid-col-4">
-                <img *ngIf="model.type == 3 && model.videoUrl" [attr.src]="model.thumbnail">
-            </div> -->
+                <div *ngIf="model.emailAddress">
+                    <p>Email Address: <b>{{model.emailAddress}}</b></p>
+                </div>
+                <div *ngIf="model.department">
+                    <p>Department: <b>{{model.department}}</b></p>
+                </div>
+                <div *ngIf="model.role">
+                    <p>Role: <b>{{model.role}}</b></p>
+                </div>
+                <div *ngIf="model.domain">
+                    <p>Domain: <b>{{model.domain}}</b></p>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

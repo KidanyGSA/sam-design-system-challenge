@@ -17,13 +17,12 @@ export class UserDirectoryService {
      * Here is the main method that the design system calls
      */
 	getData(search: SearchParameters): Observable<SearchResult> {
-
 		let records = userDirectoryData;
 
-        /* Filter */
-        if(search && search.filter) {			
-        	records = userDirectoryData.filter(record => this.filterRecord(record, search.filter))
-        }
+		/* Filter */
+		if (search && search.filter) {
+			records = userDirectoryData.filter(record => this.filterRecord(record, search.filter))
+		}
 
 		/* Sort */
 		this.sortRecords(records, search);
@@ -45,10 +44,16 @@ export class UserDirectoryService {
 			if(!answer){return false; }
 		}
 
-		if(filter.department && filter.department.length > 0) {
-    		if(!this.hasDepartment(record, filter.department)) {
-    			return false;
-    		}
+		if (filter.department && filter.department.length > 0) {
+			if (!this.filterDepartment(record, filter.department)) {
+				return false;
+			}
+		}
+
+		if (filter.domain && filter.domain.length > 0) {
+			if (!this.filterDomain(record, filter.domain)) {
+				return false;
+			}
 		}
 		
 		return true;
@@ -63,27 +68,48 @@ export class UserDirectoryService {
 		}
 		return trueValues.includes(record.role);
 	}
-	
-	hasDepartment (record, departmentList){
-			for (let department of departmentList){
-				if(department.value == record.department) {					
-					return true;
-				}			
+
+	/**
+	 * Determines if the records contain the selected departments
+	 * @param record 
+	 * @param departmentList 
+	 */
+	filterDepartment(record, departmentList) {
+		for (let department of departmentList) {
+			if (department.value == record.department) {
+				return true;
 			}
-			return false;
+		}
+		return false;
 	}
 
-    sortRecords(records, search: SearchParameters) {
-        records.sort((a, b) => {
-            switch (search.sortField) {
-            	case 'userAscending':
-            		return (a.givenName > b.givenName) ? 1 : -1;
-            	case 'userDescending':
-            		return (a.givenName > b.givenName) ? -1 : 1;
-            	default: {
-            		return (a.givenName > b.givenName) ? 1 : -1;
-            	}
-           }
+	/**
+	 * Determines if the records contains the selected domain
+	 * In this case domain is a single select thus the loop is not necessary but it allows for multiple select in the future
+	 * @param record 
+	 * @param domainList 
+	 */
+	filterDomain(record, domainList) {
+		for (let domain of domainList) {
+			if (domain.value == record.domain) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	sortRecords(records, search: SearchParameters) {
+		records.sort((a, b) => {
+			switch (search.sortField) {
+				case 'userAscending':
+					return (a.givenName > b.givenName) ? 1 : -1;
+				case 'userDescending':
+					return (a.givenName > b.givenName) ? -1 : 1;
+				default: {
+					return (a.givenName > b.givenName) ? 1 : -1;
+				}
+			}
 		});
 	}
 }

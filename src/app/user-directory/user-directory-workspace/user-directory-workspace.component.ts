@@ -10,14 +10,14 @@ import { SearchListConfiguration } from '@gsa-sam/layouts';
 
 import { workspaceMenuData } from '../../common/sam-workspace-menu/user-directory-menu.data';
 import { UserDirectoryService } from '../user-directory-service/user-directory-api.service';
-import { FiltersService } from './user-directory-filters/filters.config.service';
+import { FiltersConfigService } from './user-directory-filters/filters-config.service';
 import { listConfig } from './searchList.config'
 
 @Component({
   selector: 'app-user-directory-workspace',
   templateUrl: './user-directory-workspace.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UserDirectoryService, FiltersService]
+  providers: [UserDirectoryService, FiltersConfigService]
 })
 export class UserDirectoryWorkspaceComponent implements OnInit {
 
@@ -40,7 +40,7 @@ export class UserDirectoryWorkspaceComponent implements OnInit {
 
   constructor(private change: ChangeDetectorRef,
               public service: UserDirectoryService, 
-              public filterService: FiltersService) { }
+              public filterService: FiltersConfigService) { }
 
   ngOnInit() {
     this.listModel = listConfig;

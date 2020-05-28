@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FiltersService } from './filters.config.service';
+import { FiltersConfigService } from './filters-config.service';
 
-describe('FiltersService', () => {
+describe('FiltersConfigService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FiltersService = TestBed.get(FiltersService);
+    const service: FiltersConfigService = TestBed.get(FiltersConfigService);
     expect(service).toBeTruthy();
   });
 });

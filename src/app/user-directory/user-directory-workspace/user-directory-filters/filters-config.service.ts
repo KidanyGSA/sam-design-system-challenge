@@ -11,7 +11,7 @@ import {
  * This service manages the formly filter definitions and model.
  */
 @Injectable()
-export class FiltersService {
+export class FiltersConfigService {
 
  // recordTypeSettings: SDSAutocompletelConfiguration = new SDSAutocompletelConfiguration();
 

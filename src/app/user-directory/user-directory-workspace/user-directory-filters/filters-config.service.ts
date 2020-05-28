@@ -3,9 +3,8 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 
 import { SDSAutocompletelConfiguration, SelectionMode } from '@gsa-sam/components';
 
-import {
-  DepartmentFilterService,
-} from '../../../common/public-apis';
+import { DepartmentFilterService } from '../../../common/public-apis';
+import { DomainFilterService } from '../../../common/sam-filters/domain-filters/domain-filter.service';
 
 /**
  * This service manages the formly filter definitions and model.
@@ -14,7 +13,8 @@ import {
 export class FiltersConfigService { 
 
   constructor(
-    private hierarchyService: DepartmentFilterService
+    private hierarchyService: DepartmentFilterService,
+    private domainService: DomainFilterService
   ) {}
 
 
@@ -36,7 +36,6 @@ export class FiltersConfigService {
       type: 'autocomplete',
       templateOptions: {
         label: 'Department',
-        placeholder: "Type a name or email",
         group: 'accordion',
         className: 'sds-accordion__title',
         service: this.hierarchyService,
@@ -44,21 +43,17 @@ export class FiltersConfigService {
         model: this.hierarchyService.model
       },
     },
-    // {
-    //   key: 'typeOfNoticeWrapper',
-    //   wrappers: ['accordionwrapper'],
-    //   templateOptions: { label: 'Type of Notice' },
-    //   fieldGroup: [
-    //     {
-    //       key: 'typeOfNotice',
-    //       type: 'autocomplete',
-    //       templateOptions: {
-    //       service: this.typeOfNoticeService,
-    //       configuration: this.typeOfNoticeService.noticeTypeConfig,
-    //       model: this.typeOfNoticeService.model
-    //       }
-    //     }
-    //   ]
-    // },
+    {
+      key: 'domain',
+      type: 'autocomplete',
+      templateOptions: {
+        label: 'Domain',
+        group: 'accordion',
+        className: 'sds-accordion__title',
+        service: this.domainService,
+        configuration: this.domainService.config,
+        model: this.domainService.model
+      },
+    }
   ];
 }

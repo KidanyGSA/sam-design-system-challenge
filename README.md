@@ -2,6 +2,26 @@
 
 Create an Angular application that best reflects the intent of the SAM Design System and supports the SAM.gov ecosystem.
 
+
+# The application showcases 4 Formly filters
+- Department Filter: This is an autocomplete
+- Domain Filter: This is a select
+- Role Filter:  This is a checkbox filter with conditional logic.
+- User Filter: This is an autocomplete with free text.
+
+# The application uses multiple system design components including
+	- Toolbar
+	- Accordion
+	- Filters
+	- Side Navigation
+	- Search Result List
+
+# Example of modularization in the application 
+	- Dependency Injection: FiltersConfigService, DepartmentFilterService,  DomainFilterService are designed as injectable class.
+	- Lazy loading: Child routes are loaded specifying lazy-loading syntax.
+  
+  
+
 # Getting Started
 This repository is setup to work with federalist for hosting and demo purposes.
 

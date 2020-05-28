@@ -4,15 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
   	path: '',
-  	redirectTo: '/workspace/integrity-info', pathMatch: 'full'
+  	redirectTo: '/workspace/user-directory', pathMatch: 'full'
   },
   {
-    path: 'workspace/integrity-info',
-    loadChildren: () => import('./integrity-info/integrity-info-workspace/integrity-info-workspace.module').then(m => m.IntegrityInfoWorkspaceModule)
+    path: 'workspace/user-directory',
+    loadChildren: () => import('./user-directory/user-directory-workspace/user-directory-workspace.module').then(m => m.UserDirectoryWorkspaceModule)
   },
   {
   	path: '**',
-  	redirectTo: '/workspace/integrity-info', pathMatch: 'full'
+  	redirectTo: '/workspace/user-directory', pathMatch: 'full'
   }
 ];
 

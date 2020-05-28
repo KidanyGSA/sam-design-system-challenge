@@ -1,0 +1,45 @@
+
+<div class="grid-row grid-gap">
+	<div class="tablet-lg:grid-col-fill">
+		<h2  class="sds-card--subtitle"><a class="usa-link">{{model.awardeeName}}</a></h2>
+	</div>
+	<div class="tablet-lg:grid-col-auto">
+		<div class="grid-row grid-gap">
+			<div class="mobile:grid-auto">
+		        <span class="sds-type--label-title">Record Date</span>
+		        <span class="sds-tag sds-tag--outline flex-justify-center">{{model.recordDate | date }}</span>
+		    </div>
+			<div class="mobile:grid-auto">
+				<sds-actions-menu [model]="menu" (clicks)="menuClicked($event)"></sds-actions-menu>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="grid-row grid-gap">
+	<div class="tablet:grid-col sds-field sds-field--stacked">
+        <div class="sds-field__name">Unique Entity ID</div>
+        <div class="sds-field__value">{{model.DUNS}}</div>
+    </div>
+    <div class="tablet:grid-col sds-field sds-field--stacked">
+        <div class="sds-field__name">Subtier</div>
+        <div class="sds-field__value">{{model.agency}} ({{model.agencyCode}})</div>
+    </div>
+    <div class="tablet:grid-col sds-field sds-field--stacked">
+        <div class="sds-field__name">Record Type</div>
+        <div class="sds-field__value">{{model.recordType}}</div>
+    </div>
+</div>
+<div class="grid-row grid-gap">
+	<div class="tablet:grid-col sds-field sds-field--stacked">
+        <div class="sds-field__name">CAGE / NCAGE</div>
+        <div class="sds-field__value">{{model.CAGE}}</div>
+    </div>
+    <div class="tablet:grid-col sds-field sds-field--stacked">
+        <div class="sds-field__name">Contract / Grant Number</div>
+        <div class="sds-field__value">{{model.awardNumber}}</div>
+    </div>
+    <div class="tablet:grid-col sds-field sds-field--stacked">
+        <div class="sds-field__name">Termination Type</div>
+        <div class="sds-field__value">{{model.terminationType}}</div>
+    </div>
+</div>

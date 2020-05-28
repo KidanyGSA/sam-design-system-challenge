@@ -7,7 +7,7 @@ import { LocationStrategy } from '@angular/common';
 })
 export class AppService {
 
-  signedIn: boolean = false;
+  signedIn: boolean = true;
 
   constructor(public router: Router, private locationStrategy: LocationStrategy) {
   }

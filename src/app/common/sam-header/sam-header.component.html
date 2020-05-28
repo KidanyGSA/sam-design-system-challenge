@@ -99,10 +99,10 @@
             <fa-icon [icon]="['sds', 'messages']"></fa-icon>
           </fa-layers>
           <span class="sds-nav__secondary-item-text">Notifications</span></a>
-    </li><li *ngIf="model.signedIn" class="usa-nav__secondary-item"> 
+    </li><li *ngIf="model.signedIn" class="usa-nav__secondary-item usa-current"> 
         <a
             [attr.id]="workspace"
-            [attr.class]="sectionId == 'workspace' ? 'usa-current' : ''"
+            [class.usa-current]="sectionId == 'workspace'"
           >
          <fa-layers [fixedWidth]="true">
             <fa-icon [icon]="['sds', 'workspace']"></fa-icon>

@@ -11,7 +11,6 @@ import { userDirectoryData } from './user.data';
 export class UserDirectoryService {
 
 	constructor() { }
-
     /*
      * Here is the main method that the design system calls
      */
@@ -38,14 +37,21 @@ export class UserDirectoryService {
 	//Filter records given the filter object containing the formly filter model
 	filterRecord(record, filter) {
 
+		//Department filter
 		if (filter.department && filter.department.length > 0) {
 			if (!this.filterDepartment(record, filter.department)) {
 				return false;
 			}
 		}
-
+		//Domain filter
 		if (filter.domain && filter.domain.length > 0) {
 			if (!this.filterDomain(record, filter.domain)) {
+				return false;
+			}
+		}
+		//User search filter
+		if (filter.userSearch && filter.userSearch.length > 0) {
+			if (!this.filterUserByName(record, filter.userSearch)) {
 				return false;
 			}
 		}
@@ -82,45 +88,17 @@ export class UserDirectoryService {
 		return false;
 	}
 
-	filterTerminationType(record, terminationType) {
-		if (!terminationType.Complete && !terminationType.Partial && !terminationType.NA) {
-			return true;
-		}
-		if (terminationType.Complete && record.terminationType == 'Complete') {
-			return true
-		}
-		if (terminationType.Partial && record.terminationType == 'Partial') {
-			return true
-		}
-		if (terminationType.NA && record.terminationType == 'N/A') {
-			return true
+	filterUserByName(record, nameKeywords) {
+		for (let keyword of nameKeywords) {
+			if (record.givenName.toLowerCase().startsWith(keyword.value.toLowerCase())
+				|| record.familyName.toLowerCase().startsWith(keyword.value.toLowerCase())
+				|| record.emailAddress.toLowerCase().includes(keyword.value.toLowerCase())) {
+				return true;
+			}
 		}
 		return false;
 	}
 
-	filterAwardee(record, awardee) {
-		for (let i = 0; awardee.name && i < awardee.name.length; i++) {
-			if (record.awardeeName == awardee.name[i].AWARDEE) {
-				return true;
-			}
-		}
-		for (let i = 0; awardee.ueiduns && i < awardee.ueiduns.length; i++) {
-			if (record.DUNS == awardee.ueiduns[i].DUNS) {
-				return true;
-			}
-		}
-		for (let i = 0; awardee.cage && i < awardee.cage.length; i++) {
-			if (record.CAGE == awardee.cage[i].CAGE) {
-				return true;
-			}
-		}
-		if ((!awardee.name || (awardee.name && awardee.name.length == 0)) &&
-			(!awardee.ueiduns || (awardee.ueiduns && awardee.ueiduns.length == 0)) &&
-			(!awardee.cage || (awardee.cage && awardee.cage.length == 0))) {
-			return true;
-		}
-		return false;
-	}
 
 	sortRecords(records, search: SearchParameters) {
 		records.sort((a, b) => {

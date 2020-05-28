@@ -5,6 +5,7 @@ import { SDSAutocompletelConfiguration, SelectionMode } from '@gsa-sam/component
 
 import { DepartmentFilterService } from '../../../common/public-apis';
 import { DomainFilterService } from '../../../common/sam-filters/domain-filters/domain-filter.service';
+import { UserSearchService } from './userSearch.service';
 
 /**
  * This service manages the formly filter definitions and model.
@@ -14,7 +15,8 @@ export class FiltersConfigService {
 
   constructor(
     private hierarchyService: DepartmentFilterService,
-    private domainService: DomainFilterService
+    private domainService: DomainFilterService,
+    private userService: UserSearchService
   ) {}
 
 
@@ -22,13 +24,15 @@ export class FiltersConfigService {
 
   public filters: FormlyFieldConfig[] = [
     {
-      key: 'keyword',
-      type: 'input',
+      key: 'userSearch',
+      type: 'autocomplete',
       templateOptions: {
         label: 'Users',
-        placeholder: "Type a name or email",
         group: 'panel',
-        className: 'sds-accordion__title'
+        className: 'sds-accordion__title',
+        service: this.userService,
+        configuration: this.userService.config,
+        model: this.userService.model
       },
     },
     {

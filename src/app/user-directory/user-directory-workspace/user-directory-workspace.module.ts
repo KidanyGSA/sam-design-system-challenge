@@ -21,6 +21,7 @@ import { UserDirectoryWorkspaceComponent } from './user-directory-workspace.comp
 import { UserDirectoryWorkspaceRoutingModule } from './user-directory-workspace-routing.module';
 import { UserDirectoryItemComponent } from './user-directory-item/user-directory-item.component';
 import { CommonFiltersModule } from 'src/app/common/sam-filters/common-filters.module';
+import { CommonFilterUtilsService } from 'src/app/common/sam-filters/common-filter-utils.service';
 
 
 
@@ -39,10 +40,11 @@ import { CommonFiltersModule } from 'src/app/common/sam-filters/common-filters.m
     SdsFiltersModule,
     SdsSubheaderModule, 
     SearchListServiceModule,
-    UserDirectoryWorkspaceRoutingModule,   
+    UserDirectoryWorkspaceRoutingModule,
     CommonFiltersModule, 
   ],
   exports: [UserDirectoryWorkspaceComponent],
-  providers: [SDSFormlyUpdateComunicationService, ]
+  providers: [SDSFormlyUpdateComunicationService, CommonFilterUtilsService,
+    ]
 })
 export class UserDirectoryWorkspaceModule { }

@@ -9,44 +9,59 @@ import { userDirectoryData } from './user.data';
  */
 @Injectable()
 export class UserDirectoryService {
+	
 
-  constructor() { }  	
+	constructor() { }
 
     /*
      * Here is the main method that the design system calls
      */
-    getData(search: SearchParameters): Observable<SearchResult> {
-		console.log("search")
-		console.log(search)
+	getData(search: SearchParameters): Observable<SearchResult> {
 
-        let records = userDirectoryData;
+		let records = userDirectoryData;
 
         /* Filter */
         if(search && search.filter) {			
         	records = userDirectoryData.filter(record => this.filterRecord(record, search.filter))
         }
 
-        /* Sort */
-        this.sortRecords(records, search);
+		/* Sort */
+		this.sortRecords(records, search);
 
-        /* Return slice */
-        const start = search.page.pageNumber * search.page.pageSize - search.page.pageSize;
-        const end = start + search.page.pageSize;
-        return of({
-            items: records.slice(start, end),
-            totalItems: records.length
-        });
-    }
+		/* Return slice */
+		const start = search.page.pageNumber * search.page.pageSize - search.page.pageSize;
+		const end = start + search.page.pageSize;
+		return of({
+			items: records.slice(start, end),
+			totalItems: records.length
+		});
+	}
 
 	//Filter records given the filter object containing the formly filter model
-    filterRecord(record, filter) {
+	filterRecord(record, filter) {
 
-    	if(filter.department.length > 0) {
+		if (filter.role) {
+			const answer = this.filterRoleType(record, filter.role);
+			if(!answer){return false; }
+		}
+
+		if(filter.department && filter.department.length > 0) {
     		if(!this.hasDepartment(record, filter.department)) {
     			return false;
     		}
-    	}
-    	return true;
+		}
+		
+		return true;
+	}
+
+	filterRoleType(record, roleFilters) {
+		const trueValues: string[] = Object.entries(roleFilters).filter(([k, v]) => {
+			return v === true;
+		}).map(([k, v]) => { return k });
+		if(trueValues.length<1){
+			return true;
+		}
+		return trueValues.includes(record.role);
 	}
 	
 	hasDepartment (record, departmentList){
@@ -57,46 +72,6 @@ export class UserDirectoryService {
 			}
 			return false;
 	}
-
-    filterTerminationType(record, terminationType) {
-    	if(!terminationType.Complete && !terminationType.Partial && !terminationType.NA) {
-    		return true;
-    	}
-    	if(terminationType.Complete && record.terminationType == 'Complete') {
-    		return true
-    	}
-    	if(terminationType.Partial && record.terminationType == 'Partial') {
-    		return true
-    	}
-    	if(terminationType.NA && record.terminationType == 'N/A') {
-    		return true
-    	}
-    	return false;
-    }
-
-    filterAwardee(record, awardee) {
-    	for(let i=0; awardee.name && i < awardee.name.length; i++) {
-    		if(record.awardeeName == awardee.name[i].AWARDEE) {
-    			return true;
-    		}
-    	}
-    	for(let i=0; awardee.ueiduns && i < awardee.ueiduns.length; i++) {
-    		if(record.DUNS == awardee.ueiduns[i].DUNS) {
-    			return true;
-    		}
-    	}
-    	for(let i=0; awardee.cage && i < awardee.cage.length; i++) {
-    		if(record.CAGE == awardee.cage[i].CAGE) {
-    			return true;
-    		}
-    	}
-        if((!awardee.name || (awardee.name && awardee.name.length == 0)) && 
-        	(!awardee.ueiduns || (awardee.ueiduns && awardee.ueiduns.length == 0)) &&
-        	(!awardee.cage || (awardee.cage && awardee.cage.length == 0))) {
-        	return true;
-        }
-    	return false;
-    }
 
     sortRecords(records, search: SearchParameters) {
         records.sort((a, b) => {
@@ -110,6 +85,6 @@ export class UserDirectoryService {
             	}
            }
 		});
-    }
+	}
 }
 

@@ -13,12 +13,12 @@ import {
 @Injectable()
 export class FiltersConfigService { 
 
+  public model = {};
+  
   constructor(
     private hierarchyService: DepartmentFilterService
   ) {}
 
-
-  public model = {};
 
   public filters: FormlyFieldConfig[] = [
     {
@@ -31,34 +31,63 @@ export class FiltersConfigService {
         className: 'sds-accordion__title'
       },
     },
-    {
-      key: 'department',
-      type: 'autocomplete',
+    { key: 'role',
+      wrappers: ['accordionwrapper'],
+      type: 'multicheckbox',
       templateOptions: {
-        label: 'Department',
-        placeholder: "Type a name or email",
-        group: 'accordion',
-        className: 'sds-accordion__title',
-        service: this.hierarchyService,
-        configuration: this.hierarchyService.config,
-        model: this.hierarchyService.model
+        label: 'Role',
+        // group: 'role',
+        defaultValue: false,
+        options: [
+          {
+            label: 'AAC User',
+            value: 'AAC User',
+            },
+            {
+              label: 'Administrator',
+              value: 'Administrator'
+              },
+              {
+                label: 'Administrator All Domains',
+                value: 'Administrator All Domains'
+                },
+                {
+                  label: 'Assistance Administrator',
+                  value: 'Assistance Administrator'
+                  },
+                  {
+                    label: 'Assistance User',
+                    value: 'Assistance User'
+                    },
+                    {
+                      label: 'Content Manager',
+                      value: 'Content Manager'
+                      },
+                      {
+                        label: 'Contracting Officer',
+                        value: 'Contracting Officer'
+                        },
+                        {
+                          label: 'Contracting Specialist',
+                          value: 'Contracting Specialist'
+                          },
+        ]
+      }},
+      {
+        key: 'department',
+        type: 'autocomplete',
+        templateOptions: {
+          label: 'Department',
+          placeholder: "Type a name or email",
+          group: 'accordion',
+          className: 'sds-accordion__title',
+          service: this.hierarchyService,
+          configuration: this.hierarchyService.config,
+          model: this.hierarchyService.model
+        },
       },
-    },
-    // {
-    //   key: 'typeOfNoticeWrapper',
-    //   wrappers: ['accordionwrapper'],
-    //   templateOptions: { label: 'Type of Notice' },
-    //   fieldGroup: [
-    //     {
-    //       key: 'typeOfNotice',
-    //       type: 'autocomplete',
-    //       templateOptions: {
-    //       service: this.typeOfNoticeService,
-    //       configuration: this.typeOfNoticeService.noticeTypeConfig,
-    //       model: this.typeOfNoticeService.model
-    //       }
-    //     }
-    //   ]
-    // },
   ];
-}
+
+
+}// end of class
+

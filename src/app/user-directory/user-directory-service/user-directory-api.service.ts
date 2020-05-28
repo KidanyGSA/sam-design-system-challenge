@@ -9,6 +9,7 @@ import { userDirectoryData } from './user.data';
  */
 @Injectable()
 export class UserDirectoryService {
+	
 
 	constructor() { }
     /*
@@ -37,6 +38,12 @@ export class UserDirectoryService {
 	//Filter records given the filter object containing the formly filter model
 	filterRecord(record, filter) {
 
+		//Role filter
+		if (filter.role) {
+			const answer = this.filterRoleType(record, filter.role);
+			if(!answer){return false; }
+		}
+
 		//Department filter
 		if (filter.department && filter.department.length > 0) {
 			if (!this.filterDepartment(record, filter.department)) {
@@ -57,6 +64,16 @@ export class UserDirectoryService {
 		}
 
 		return true;
+	}
+
+	filterRoleType(record, roleFilters) {
+		const trueValues: string[] = Object.entries(roleFilters).filter(([k, v]) => {
+			return v === true;
+		}).map(([k, v]) => { return k });
+		if(trueValues.length<1){
+			return true;
+		}
+		return trueValues.includes(record.role);
 	}
 
 	/**

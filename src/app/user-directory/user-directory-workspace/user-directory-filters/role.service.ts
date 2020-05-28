@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SDSAutocompletelConfiguration, SDSSelectedItemModel, SelectionMode, SDSHiercarchicalServiceResult, SDSAutocompleteServiceInterface } from '@gsa-sam/components';
 import { userDirectoryData } from '../../user-directory-service/user.data';
+import {CommonFilterUtilsService} from './common-filter-utils.service';
+import { of } from 'rxjs';
 
 @Injectable()
 export class RoleService implements SDSAutocompleteServiceInterface{
@@ -10,7 +12,7 @@ export class RoleService implements SDSAutocompleteServiceInterface{
   private serviceResult: SDSHiercarchicalServiceResult;
 
 
-  constructor(private filterUtils: CommonFiltersUtil) {
+  constructor(private filterUtils: CommonFilterUtilsService) {
     this.config.primaryKeyField = 'key';
     this.config.primaryTextField = 'value';
     this.config.secondaryTextField = '';
@@ -33,9 +35,5 @@ export class RoleService implements SDSAutocompleteServiceInterface{
     }
     return of(updatedList);
   }
-
-
-}
-
 
 }// end of class
